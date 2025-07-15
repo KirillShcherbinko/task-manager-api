@@ -17,4 +17,4 @@ RUN npx prisma generate
 COPY . .
 
 # 5. Запускаем приложение (миграции применятся при запуске)
-CMD ["sh", "-c", "npm run db:migrate && npm run db:deploy && npm run db:seed && npm run dev"]
+CMD ["sh", "-c", "npm run db:deploy && npm run db:seed && npm run dev"]
