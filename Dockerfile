@@ -9,7 +9,6 @@ RUN npm install
 
 # 2. Копируем Prisma схему и .env файл
 COPY prisma ./prisma/
-COPY .env ./
 
 # 3. Генерируем клиент (без применения миграций)
 RUN npx prisma generate
