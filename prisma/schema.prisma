@@ -16,8 +16,8 @@ enum TaskCategory {
 }
 
 enum TaskStatus {
-  ToDo       @map("To Do")
-  InProgress @map("In Progress")
+  ToDo
+  InProgress
   Done
 }
 

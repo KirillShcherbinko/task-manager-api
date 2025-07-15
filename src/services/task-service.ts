@@ -1,5 +1,6 @@
 import prisma from '@/config/prisma';
-import { TTaskItem } from '@/types/task-types';
+
+import { Task } from '@prisma/client';
 
 class TaskService {
   async getAllTasks() {
@@ -7,11 +8,23 @@ class TaskService {
     return tasks;
   }
 
-  async createTask(task: TTaskItem) {
-    const createdTask = prisma.task.create({
+  async createTask(task: Task) {
+    const createdTask = await prisma.task.create({
       data: { ...task },
     });
     return createdTask;
+  }
+
+  async updateTask(taskId: number, newTaskData: Partial<Task>) {
+    const updatedTask = await prisma.task.update({
+      where: { id: taskId },
+      data: newTaskData,
+    });
+    return updatedTask;
+  }
+
+  async deleteTask(taskId: number) {
+    await prisma.task.delete({ where: { id: taskId } });
   }
 }
 
