@@ -29,8 +29,8 @@ class TaskController {
       console.log('taskId:', request.params.id);
       const taskId = Number(request.params.id);
       const newTaskData = request.body;
-      await taskService.updateTask(taskId, newTaskData);
-      response.status(200).send();
+      const updatedTask = await taskService.updateTask(taskId, newTaskData);
+      response.status(200).json({ updatedTask });
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Server error';
       response.status(500).json({ message });
@@ -40,8 +40,8 @@ class TaskController {
   async deleteTask(request: Request, response: Response) {
     try {
       const taskId = Number(request.params.id);
-      const deletedTask = await taskService.deleteTask(taskId);
-      response.status(204).json(deletedTask);
+      await taskService.deleteTask(taskId);
+      response.status(204).send();
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Server error';
       response.status(500).json({ message });
