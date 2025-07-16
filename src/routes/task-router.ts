@@ -8,5 +8,6 @@ export const taskRouter = Router();
 
 taskRouter.get('/tasks', taskController.getAllTasks);
 taskRouter.post('/tasks/new', validationMiddleware(taskSchema), taskController.createTask);
+taskRouter.get('/tasks/:id', taskController.getTaskById);
 taskRouter.patch('/tasks/:id', validationMiddleware(updateTaskSchema), taskController.updateTask);
 taskRouter.delete('/tasks/:id', taskController.deleteTask);

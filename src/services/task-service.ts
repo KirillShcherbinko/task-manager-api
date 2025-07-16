@@ -15,6 +15,11 @@ class TaskService {
     return createdTask;
   }
 
+  async getTaskById(taskId: number) {
+    const task = await prisma.task.findUnique({ where: { id: taskId } });
+    return task;
+  }
+
   async updateTask(taskId: number, newTaskData: Partial<Task>) {
     const updatedTask = await prisma.task.update({
       where: { id: taskId },

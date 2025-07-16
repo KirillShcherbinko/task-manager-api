@@ -1,5 +1,7 @@
 import taskService from '@/services/task-service';
 
+import { request } from 'http';
+
 import { Request, Response } from 'express';
 
 class TaskController {
@@ -24,9 +26,19 @@ class TaskController {
     }
   }
 
+  async getTaskById(request: Request, response: Response) {
+    try {
+      const taskId = Number(request.params.id);
+      const task = await taskService.getTaskById(taskId);
+      response.status(200).json(task);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Server error';
+      response.status(500).json({ message });
+    }
+  }
+
   async updateTask(request: Request, response: Response) {
     try {
-      console.log('taskId:', request.params.id);
       const taskId = Number(request.params.id);
       const newTaskData = request.body;
       const updatedTask = await taskService.updateTask(taskId, newTaskData);
